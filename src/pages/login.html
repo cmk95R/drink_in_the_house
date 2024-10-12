@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Drunk in the House</title>
-    <link rel="stylesheet" href="../resources/css/recup_contra.css">
+    <link rel="stylesheet" href="/resources/css/register.css"> <!-- Asegúrate de que el nombre sea correcto -->
 </head>
 <body>
 
@@ -13,17 +13,20 @@
     </header>
 
     <main>
-        <form action="/api/change-password" method="POST">
-            <h2 class="Registro">Recupere su Contraseña</h2>
+        <form action="/api/login" method="POST">
+            <h2 class="Registro">INICIO DE SESSION</h2>
+            
             <input type="email" placeholder="Email" id="email" name="email" required>
-            <input type="password" placeholder="Contraseña Actual" id="currentPassword" name="currentPassword" required>
-            <input type="password" placeholder="Nueva Contraseña" id="newPassword" name="newPassword" required>
-            <input type="password" placeholder="Repite la Nueva Contraseña" id="confirmPassword" name="confirmPassword" required>
+
+            <input type="password" placeholder="Contraseña" id="contrasena" name="password" required>
+            <a href="/api/change-password" class="button">CAMBIAR CONTRASEÑA</a>
+            <br>
             <button type="submit">Enviar</button>
             <br>
             <a href="javascript:history.back()" class="btn">VOLVER</a> <!-- Botón para volver a la página anterior -->
 
         </form>
+
     </main>
 
     <footer>

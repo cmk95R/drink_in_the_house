@@ -1,0 +1,50 @@
+/* Estilo global */
+body {
+    background-image: url("../imagenes/registro.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el body cubra toda la altura de la pantalla */
+}
+
+/* Estilo para el header */
+header {
+    background-color: #ff9d00;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    height: 50px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+/* Estilo para el footer */
+footer {
+    background-color: #ff9d00;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+}
+
+/* Estilo para el formulario */
+main {
+    flex: 1; /* El contenido del main ocupará todo el espacio disponible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+

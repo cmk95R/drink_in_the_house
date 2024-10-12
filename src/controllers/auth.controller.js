@@ -5,43 +5,63 @@ import { createAccessToken } from "../libs/jwt.js";
 
 
 export const register = async (req, res) => {
+    console.log("Registro en curso");
 
-        const {username,email, password,phoneNumber, address} = req.body
-        console.log(username , email , password,phoneNumber,address);
-    
+    const { username, email, password, phoneNumber, address } = req.body;
+
+    console.log(username, email, password, phoneNumber, address);
+
     try {
-
-        const passwordHash = await bcrypt.hash(password,10)
+        const passwordHash = await bcrypt.hash(password, 10);
         const newUser = new User({
             username,
             email,
             password: passwordHash,
             phoneNumber,
-            address:{
-            street: address.street,
-            city: address.city,
-            province: address.province,
-            postalCode:address.postalCode
-        }    
-        })
-            const userSaved = await newUser.save()
-            const token = await createAccessToken({id:userSaved._id})
-            res.cookie("token",token)
-            res.json({
-            id:userSaved.id,
-            username: userSaved.username,
-            email: userSaved.email,
-            phoneNumber: userSaved.phoneNumber,
-            address: userSaved.address,
-            createdAt: userSaved.createdAt,
-            updatedAt: userSaved.updatedAt
-            }); 
+            address: {
+                street: address.street,
+                city: address.city,
+                province: address.province,
+                postalCode: address.postalCode
+            }
+        });
 
-        }   catch (error) {
-            res.status(500).json({message:error.message});
-            }   
-}
+        const userSaved = await newUser.save();
+        const token = await createAccessToken({ id: userSaved._id });
+        res.cookie("token", token);
 
+        // Redirigir a la página de confirmación después del registro 
+        res.redirect("/api/confirm");
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+export const changePassword = async (req,res) => {
+    const {currentPassword,newPassword,confirmPassword} = req.body
+
+    if (newPassword !== confirmPassword) {
+        return res.status(400).json({ message:"Las contraseñas no coinciden"})
+    }
+    try {
+        const userFound = await User.findById(req.user.id)
+        if (!userFound) {
+            return res.status(404).json ({message:"Usuario no encontrado"})
+        }
+        const isMatch = await bcrypt.compare(currentPassword,userFound.password)
+        if (!isMatch) {
+            return res.status(400).json ({message:"La contraseña actual es incorrecta"})
+        }
+        const passwordHash = await bcrypt.hash(newPassword, 10);
+        userFound.password = passwordHash
+        await userFound.save()
+        console.log("NuevaContraseña: "+ newPassword);
+        res.redirect("/api/confirmChangePass");
+
+
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }
+};
 export const login = async (req, res) => {
 
     const {email, password} = req.body

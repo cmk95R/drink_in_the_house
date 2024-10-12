@@ -6,4 +6,4 @@ const port = 4000;
 connectDB()
 app.listen(port);
 
-console.log ("Server Funcando en puerto 4000")
+console.log ("Server Funcando en puerto 4000 " + "http://localhost:"+ port);
