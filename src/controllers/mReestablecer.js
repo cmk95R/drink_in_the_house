@@ -2,7 +2,7 @@ import { Router } from "express";
 import nodemailer from "nodemailer";
 const router = Router();//enrutador
 
-export const mReestablecer = router.post('/send-pass', async (req, res) =>{//recibir los datos
+export const mReestablecer = router.post('/api/register', async (req, res) =>{//recibir los datos
     const { name, email, message } = req.body;//Si se borra los 3 inputs mencionados en ./routes/index.html, se podría borrar esto tambien
 //Recibiendo los datos enviados del formulario
 
