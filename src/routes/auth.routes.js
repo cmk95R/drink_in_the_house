@@ -1,10 +1,8 @@
 import { Router } from "express";
-import {login ,register,logout,profile, changePassword,resetPassword } from "../controllers/auth.controller.js"
+import {login ,register,logout,profile, changePassword } from "../controllers/auth.controller.js"
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {authRequired}  from "../middlewares/validateToken.js";
-import { mConfirmacion } from "../controllers/mConfirmacion.js";
-import { mReestablecer } from "../controllers/mReestablecer.js";
 
 
 
@@ -23,12 +21,9 @@ router.get('/confirm', (req, res) => {
     res.sendFile(path.join(__dirname, '../pages/confirm.html'));
 });
 
-router.get('/confirmSendEmail', (req, res) => {
-    res.sendFile(path.join(__dirname, '../pages/confirmSendEmail.html'));
-});
 // Ruta para mostrar la pagina de Cambio de Contraseña
 router.get('/change-password', (req, res) => {
-    res.sendFile(path.join(__dirname, '../pages/changePassword.html'));
+    res.sendFile(path.join(__dirname, '../pages/recup_contra.html'));
 });
 
 // Ruta para mostrar la confirmacion de Cambio de Contraseña 
@@ -36,19 +31,8 @@ router.get('/confirmChangePass', (req, res) => {
     res.sendFile(path.join(__dirname, '../pages/confirmNewPass.html'));
 });
 
-// Ruta para mostrar la página de recuperación de Contraseña
-router.get('/reset-password', (req, res) => {
-    res.sendFile(path.join(__dirname, '../pages/resetPassword.html'));
-});
-
-
-
+//Ruta para procesar el registro 
 router.post('/register', register);
-
-//Ruta envios de mail
-
-router.post('/reset-password', mReestablecer);
-router.post('/confirm-email', mConfirmacion);
 
 //Ruta para cambiar la pass del usuario 
 router.post('/change-password', authRequired, changePassword)
@@ -61,10 +45,7 @@ router.post('/login', login);
 
 // Otras rutas 
 
-router.get("/", (req,res) => {
-    return res.sendFile(path.join(__dirname, '../src/pages/index.html')); // Ajusta la ruta según sea necesario
 
-})
 
 router.post("/logout", logout)
 
