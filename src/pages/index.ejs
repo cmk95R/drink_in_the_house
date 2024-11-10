@@ -30,9 +30,19 @@
                 <button type="submit" style="padding: 10px; background-color: rgb(0, 0, 0); color: white; border-radius: 10px;">Buscar</button>
             </form>
         </div>
-
+        
+      <div class="slider-container">
+          <div class="slider">
+              <img  src="https://borrachines.com.ar/wp-content/uploads/2024/10/Banners-Web-BorrachinesBOrrachines-_4_-scaled.webp" alt="Imagen 1">
+              <img src="https://borrachines.com.ar/wp-content/uploads/2024/07/Banners-Web-BorrachinesBOrrachines-3-scaled-jpg.webp" alt="Imagen 2">
+              <img src="https://borrachines.com.ar/wp-content/uploads/2024/08/Te-conocemos-borrachin.-Tenemos-ofertas-para-vos-3-scaled-jpg.webp" alt="Imagen 3">
+          </div>
+          <!-- Flechas de navegación -->
+          <button class="slider-arrow left" onclick="moveSlider(-1)">&#10094;</button>
+          <button class="slider-arrow right" onclick="moveSlider(1)">&#10095;</button>
+      </div>
         <div class="products-container">
-            <h2>Productos Disponibles</h2>
+            
             <div class="card-container">
                 <div class="card-section">
                   <% products.forEach(producto => { %>
