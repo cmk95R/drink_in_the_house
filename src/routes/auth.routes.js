@@ -45,10 +45,7 @@ router.post('/login', login);
 
 // Otras rutas 
 
-router.get("/", (req,res) => {
-    return res.sendFile(path.join(__dirname, '../src/pages/index.html')); // Ajusta la ruta según sea necesario
 
-})
 
 router.post("/logout", logout)
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drunk in the House</title>
+    <link rel="stylesheet" href="/resources/css/index.css"> <!-- Asegúrate de que el nombre sea correcto -->
+</head>
+<body>
+
+    <header>
+        <div class="container-header">
+            <div>
+                <h1><a href="/"></a>Drink in the House</h1>
+            </div>
+            <div class="container-listas">
+                <ul class="box-listas">
+                    <li class="listas" style="margin-bottom: 5px;"><a href="/api/register">REGISTRO DE USUARIOS</a></li >
+                    <li class="listas"><a href="/api/login">INICIO DE SESIÓN</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Formulario de búsqueda -->
+        <div class="search-container" style="text-align: center; margin-bottom: 20px; margin-top: 20px;">
+            <form action="/" method="GET">
+                <input type="text" name="keywords" placeholder="Buscar productos..." value="<%= keywords || '' %>" style="padding: 10px; width: 300px;">
+                <button type="submit" style="padding: 10px; background-color: rgb(0, 0, 0); color: white; border-radius: 10px;">Buscar</button>
+            </form>
+        </div>
+
+        <div class="products-container">
+            <h2>Productos Disponibles</h2>
+            <div class="card-container">
+                <div class="card-section">
+                  <% products.forEach(producto => { %>
+                    <div class="product-card">
+                      
+                      <!-- Imagen del Producto -->
+                      <div class="product-tumb">
+                        <img src="<%= producto.image %>" alt="<%= producto.nombre_producto %>" style="width: 100%; height: auto; object-fit: cover;">
+                      </div>
+                      
+                      <!-- Detalles del Producto -->
+                      <div class="product-details">
+                        <h4><a href="/products/detail/<%= producto.id %>"><%= producto.nombre_producto %></a></h4>
+                        <p><%= producto.descripcion || 'Descripción no disponible' %></p>
+                        
+                        <!-- Precio y Enlaces -->
+                        <div class="product-bottom-details">
+                          <div class="product-price">
+                            <% if (producto.promocion) { %>
+                              <small><%= producto.promocion %></small><br>
+                            <% } %>
+                            $<%= producto.valor %>
+                          </div>
+                          
+                          <div class="product-links">
+                            <a href="#"><i class="fa fa-heart" style="font-size: 25px;"></i></a>
+                            <a href="/add-to-cart/<%= producto.id %>"><i class="fa fa-shopping-cart" style="font-size: 25px;"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% }); %>
+                </div>
+              </div>
+        </div>
+          
+    </main>
+
+    <footer>
+        <p>Drunk in the House - Todos los derechos reservados</p>
+    </footer>
+
+</body>
+</html>

@@ -2,6 +2,8 @@ import User from '../models/user.model.js';
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { createAccessToken } from "../libs/jwt.js";
+import mConfirmacion from './mConfirmacion.js';
+import { mReestablecer } from './mReestablecer.js';
 
 
 export const register = async (req, res) => {
@@ -30,7 +32,7 @@ export const register = async (req, res) => {
         const token = await createAccessToken({ id: userSaved._id });
         res.cookie("token", token);
 
-        // Redirigir a la página de confirmación después del registro 
+        await mConfirmacion({body: {name: username,email}},res)
         res.redirect("/api/confirm");
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -62,6 +64,43 @@ export const changePassword = async (req,res) => {
         return res.status(500).json({message: error.message})
     }
 };
+export const resetPassword = async (req, res) => {
+
+    const { email } = req.body; 
+    const { newPassword, confirmPassword } = req.body;
+
+    if (newPassword !== confirmPassword) {
+        return res.status(400).json({ message: 'Las contraseñas no coinciden.' });
+    }
+
+    try {
+        // Buscar al usuario por el email
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado.' });
+        }
+
+        // Hashear la nueva contraseña
+        const passwordHash = await bcrypt.hash(newPassword, 10);
+        user.password = passwordHash;
+        await user.save();
+
+        // Enviar el correo de confirmación usando mReestablecer
+        await mReestablecer({ body: { name: user.username, email } }, res);
+
+        // Redirigir a la página de confirmación de envío de correo
+        console.log("Se envio el mail correctamente");
+        
+        return res.redirect('/api/confirmSendEmail');
+
+    } catch (error) {
+        console.error('Error al restablecer la contraseña: ', error);
+        return res.status(500).json({ message: 'Error al restablecer la contraseña.' });
+    }
+};
+
+
 export const login = async (req, res) => {
 
     const {email, password} = req.body
