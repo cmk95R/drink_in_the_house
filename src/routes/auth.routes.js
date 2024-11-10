@@ -18,6 +18,10 @@ router.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, '../pages/register.html'));
 });
 
+router.get('/perfilusuario', (req, res) => {
+    res.sendFile(path.join(__dirname, '../pages/perfilusuario.html'));
+});
+
 // Ruta para mostrar la pagina de confirmacion de Registro
 router.get('/confirm', (req, res) => {
     res.sendFile(path.join(__dirname, '../pages/confirm.html'));
