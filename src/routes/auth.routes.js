@@ -10,7 +10,9 @@ import {authRequired}  from "../middlewares/validateToken.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = Router();
-
+router.get('/medios-pago', (req, res) => {
+    res.sendFile(path.join(__dirname, '../pages/medios-pago.html'));
+});
 // Ruta para mostrar la pagina de registro 
 router.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, '../pages/register.html'));
@@ -31,6 +33,14 @@ router.get('/confirmChangePass', (req, res) => {
     res.sendFile(path.join(__dirname, '../pages/confirmNewPass.html'));
 });
 
+router.get('/sistema-notificaciones', (req, res) => {
+    res.sendFile(path.join(__dirname, '../pages/sistema-notificaciones.html'));
+});
+
+
+router.get('/perfilUsuario', (req, res) => {
+    res.sendFile(path.join(__dirname, '../pages/perfilusuario.html'));
+});
 //Ruta para procesar el registro 
 router.post('/register', register);
 
