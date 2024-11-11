@@ -10,6 +10,22 @@ import {authRequired}  from "../middlewares/validateToken.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = Router();
+
+//Ruta para mostrar la pagina de productos
+router.get('/productos', (req, res) => {
+    res.sendFile(path.join(__dirname, '../pages/productos.html'));
+});
+
+//Ruta para mostrar la pagina de carrito
+router.get('/carrito', (req, res) => {
+    res.sendFile(path.join(__dirname, '../pages/carrito.html'));
+});
+
+//Ruta para mostrar la pagina de historial
+router.get('/historial', (req, res) => {
+    res.sendFile(path.join(__dirname, '../pages/historial.html'));
+});
+
 router.get('/medios-pago', (req, res) => {
     res.sendFile(path.join(__dirname, '../pages/medios-pago.html'));
 });
