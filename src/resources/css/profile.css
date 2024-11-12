@@ -126,3 +126,48 @@ body {
   font-size: 18px;
 }
 /*Fin de Menù lateral*/
+
+/* Estilo de menú con solapas */
+/* Estructura general */
+.container {
+  display: flex;
+}
+
+/* Estilo de la barra lateral */
+.sidebar {
+  width: 200px;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Estilos de la sección principal */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}

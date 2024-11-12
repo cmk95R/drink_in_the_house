@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu Lateral con Css</title>
+  <link rel="stylesheet" href="../resources/css/mainStyle.css" />
+  <link rel="stylesheet" href="../resources/css/profile.css" />
+  <link rel="stylesheet" href="../resources/css/medios-pago.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="btn-menu">
+        <label for="btn-menu">Menu</label>
+      </div>
+      <nav class="menu">
+        <a href="#">Inicio</a>
+        <a href="#">Nosotros</a>
+        <a href="#">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <input type="checkbox" id="btn-menu" />
+  <div class="container-menu">
+    <div class="cont-menu">
+      <nav>
+        <li><button onclick="showSection('datos')">Mis Datos</button></li>
+        <li><button onclick="showSection('historialPedidos')">Historial de pedidos</button></li>
+        <li><button onclick="showSection('mediosPago')">Métodos de pago</button></li>
+        <li><button onclick="showSection('notificaciones')">Notificaciones</button></li>
+        <li><button onclick="showSection()">Cerrar sesión</button></li>
+      </nav>
+      <label for="btn-menu">✖️</label>
+    </div>
+  </div>
+  <!-- Main -->
+  <main>
+    <div class="container">
+      <!-- Contenedor principal -->
+      <div class="main-content">
+        <section id="datos" class="section active">
+          <h2>Mis Datos</h2>
+          <p>Información de perfil, nombre, dirección, etc.</p>
+        </section>
+        <!-- Sección 2, medios de pago -->
+        <section id="historialPedidos" class="section">
+          <h2>Mis pedidos</h2>
+          <p>O "mis envíos", como quieran (creo que queda mejor "pedidos"). Acá se renderizará el listado de ese historial</p>
+
+          
+        </section>
+        <!-- Sección 3, medios de pago -->
+        <section id="mediosPago" class="section">
+          <h2>Medios de pago</h2>
+          <p>AAcá está la estructura donde renderizaran esto</p>
+          
+          <div id="payment-section">
+            <h3>Métodos de Pago</h3>
+            <div id="payment-methods">
+
+            </div>
+
+            <buttom id="add-payment-method">Añadir Método de Pago</buttom>
+
+            <div id="payment-form" style="display:none;">
+              <h4>Añadir/Editar Método de Pago</h4>
+              <label>Número de Tarjeta:</label><br>
+              <input type="text" id="card-number" placeholder="1234 5678 9012 3456"><br>
+
+              <label for="card-expiry">Fecha de Expiracion</label><br>
+              <input type="text" id="card-expery" place holder="MM/YY"><br>
+
+              <label for="card-cvv">CW:</label><br>
+              <input type="yext" id="card-cvv" placeholder="123"><br>
+
+              <buttom id="save-payment-method">Guardar</buttom>
+              <buttom id="cancel-payment">Cancelar</buttom>
+
+            </div>
+          </div>
+        </section>
+        <!-- Sección 4, notificaciones -->
+        <section id="notificaciones" class="section">
+          <h2>Configuración</h2>
+          <p>Preferencias, privacidad, etc.</p>
+
+          <div id="Notification-system">
+            <h2>Sistema de Notificaciones</h2>
+            <p>Buenas, esperemos su estadía en Drink_in_The_House este siendo increíble y a su gusto.</p>
+            <p>Aca abajo encontrará la lista de notificaciones de los servicios que el sistema le envía cada vez que
+              interactúa con la página.</p>
+            <p>Sientese con libertad en elegir cual notificación quiera recibir y cual no.</p>
+            <ul>
+              <li>
+                <div class="notification-item">
+                  <span>Confirmación de Pedido entregado</span>
+                  <div class="button-group">
+                    <button class="activar">Activar</button>
+                    <button class="desactivar">Desactivar</button>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="notification-item">
+                  <span>Confirmación de pedido cancelado</span>
+                  <div class="button-group">
+                    <button class="activar">Activar</button>
+                    <button class="desactivar">Desactivar</button>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="notification-item">
+                  <span>Confirmación de pedido en camino</span>
+                  <div class="button-group">
+                    <button class="activar">Activar</button>
+                    <button class="desactivar">Desactivar</button>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="notification-item">
+                  <span>Seguimiento del envío en tiempo real</span>
+                  <div class="button-group">
+                    <button class="activar">Activar</button>
+                    <button class="desactivar">Desactivar</button>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="notification-item">
+                  <span>Confirmación de envío cercano</span>
+                  <div class="button-group">
+                    <button class="activar">Activar</button>
+                    <button class="desactivar">Desactivar</button>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="notification-item">
+                  <span>Confirmación de pedido realizado</span>
+                  <div class="button-group">
+                    <button class="activar">Activar</button>
+                    <button class="desactivar">Desactivar</button>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="notification-item">
+                  <span>Notificación de ofertas</span>
+                  <div class="button-group">
+                    <button class="activar">Activar</button>
+                    <button class="desactivar">Desactivar</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ACÁ ESTÁ EL SCRIPT DE MEDIOS DE PAGO -->
+    <!-- <script> let paymentMethods = [
+      {
+          "id": 1,
+          "numero_tarjeta": "1234 5678 9012 3456",
+          "fecha_expiracion": "12/25",
+          "cvv": "123"
+      }
+  ];
+  
+  // Función para mostrar los métodos de pago
+  function loadPaymentMethods() {
+      const paymentMethodsDiv = document.getElementById('payment-methods');
+      paymentMethodsDiv.innerHTML = ''; // Limpiar contenido previo
+  
+      paymentMethods.forEach(method => {
+          const methodDiv = document.createElement('div');
+          methodDiv.classList.add('payment-method');
+          methodDiv.innerHTML = `
+              <p>Número de Tarjeta: ${method.numero_tarjeta}</p>
+              <p>Fecha de Expiración: ${method.fecha_expiracion}</p>
+              <button onclick="editPaymentMethod(${method.id})">Editar</button>
+              <button onclick="deletePaymentMethod(${method.id})">Eliminar</button>
+          `;
+          paymentMethodsDiv.appendChild(methodDiv);
+      });
+  }
+  
+  // Función para agregar un nuevo método de pago
+  function addPaymentMethod() {
+      document.getElementById('payment-form').style.display = 'block';
+      clearForm();
+  }
+  
+  // Función para editar un método de pago
+  function editPaymentMethod(id) {
+      const method = paymentMethods.find(m => m.id === id);
+      if (method) {
+          document.getElementById('payment-form').style.display = 'block';
+          document.getElementById('card-number').value = method.numero_tarjeta;
+          document.getElementById('card-expery').value = method.fecha_expiracion;
+          document.getElementById('card-cvv').value = method.cvv;
+          document.getElementById('save-payment-method').setAttribute('data-id', id);
+      }
+  }
+  
+  // Función para guardar o actualizar un método de pago
+  document.getElementById('save-payment-method').addEventListener('click', function() {
+      const id = this.getAttribute('data-id');
+      const cardNumber = document.getElementById('card-number').value;
+      const cardExpiry = document.getElementById('card-expery').value;
+      const cardCVV = document.getElementById('card-cvv').value;
+  
+      if (id) {
+          // Actualizar método de pago existente
+          const method = paymentMethods.find(m => m.id == id);
+          if (method) {
+              method.numero_tarjeta = cardNumber;
+              method.fecha_expiracion = cardExpiry;
+              method.cvv = cardCVV;
+          }
+      } else {
+          // Agregar nuevo método de pago
+          const newId = paymentMethods.length ? paymentMethods[paymentMethods.length - 1].id + 1 : 1;
+          paymentMethods.push({
+              id: newId,
+              numero_tarjeta: cardNumber,
+              fecha_expiracion: cardExpiry,
+              cvv: cardCVV
+          });
+      }
+  
+      loadPaymentMethods();
+      document.getElementById('payment-form').style.display = 'none';
+      clearForm();
+  });
+  
+  // Función para eliminar un método de pago
+  function deletePaymentMethod(id) {
+      paymentMethods = paymentMethods.filter(method => method.id !== id);
+      loadPaymentMethods();
+  }
+  
+  // Función para limpiar el formulario
+  function clearForm() {
+      document.getElementById('card-number').value = '';
+      document.getElementById('card-expery').value = '';
+      document.getElementById('card-cvv').value = '';
+      document.getElementById('save-payment-method').removeAttribute('data-id');
+  }
+  
+  // Función para cancelar la edición/agregar
+  document.getElementById('cancel-payment').addEventListener('click', function() {
+      document.getElementById('payment-form').style.display = 'none';
+      clearForm();
+  });
+  
+  // Cargar métodos de pago al iniciar
+  document.getElementById('add-payment-method').addEventListener('click', addPaymentMethod);
+  window.onload = loadPaymentMethods;
+  
+      
+  </script> -->
+
+  <div class="capa"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Navegación</h4>
+        <ul>
+          <li>Inicio</li>
+          <li>Catálogo</li>
+          <li>Ofertas</li>
+          <li>Contacto</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Medios de Pago</h4>
+        <ul>
+          <li>Visa</li>
+          <li>Mastercard</li>
+          <li>Paypal</li>
+          <li>Transferencia</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Medios de Envío</h4>
+        <ul>
+          <li>DHL</li>
+          <li>UPS</li>
+          <li>FedEx</li>
+          <li>Envíos locales</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Info de Sucursales</h4>
+        <ul>
+          <li>Buenos Aires</li>
+          <li>Montevideo</li>
+          <li>Asunción</li>
+          <li>Santiago</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2024 Drink-in-The-House. Todos los derechos reservados.
+    </div>
+  </footer>
+  <!-- Scripts -->
+  <script src="profile.js"></script>
+</body>
+</html>

@@ -200,45 +200,7 @@ body {
     margin-right: 3px;
     margin-left: 3px;
   }
-/* Estilo para el header */
-header {
-    background-color: #000000;
-    color: white;
-    text-align: left;
-    
-    top: 0;
-    width: 100%;
-}
 
-.container-header{
-    display: flex;
-    justify-content: space-between;
-    padding-right: 30px;
-    padding-left: 10px;
-}
-.box-listas{
-    margin: 0%;
-}
-.listas {
-    padding-bottom: 5px;
-    color: white;
-    list-style: none;
-}
-
-.listas a{
-    text-decoration: none;
-    color: white;
-}
-/* Estilo para el footer */
-footer {
-    background-color: #000000;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    width: 100%;
-    position: sticky;
-    bottom: 0;
-}
 
 
 
