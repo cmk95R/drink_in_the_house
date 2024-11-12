@@ -32,6 +32,7 @@
         <li><button onclick="showSection('historialPedidos')">Historial de pedidos</button></li>
         <li><button onclick="showSection('mediosPago')">Métodos de pago</button></li>
         <li><button onclick="showSection('notificaciones')">Notificaciones</button></li>
+        <li><button onclick="showSection('seguridad')">Seguridad</button></li>
         <li><button onclick="showSection()">Cerrar sesión</button></li>
       </nav>
       <label for="btn-menu">✖️</label>
@@ -42,6 +43,7 @@
     <div class="container">
       <!-- Contenedor principal -->
       <div class="main-content">
+        <!-- Sección 1, datos de perfil de usuario -->
         <section id="datos" class="section active">
           <h2>Mis Datos</h2>
           <p>Información de perfil, nombre, dirección, etc.</p>
@@ -49,15 +51,16 @@
         <!-- Sección 2, medios de pago -->
         <section id="historialPedidos" class="section">
           <h2>Mis pedidos</h2>
-          <p>O "mis envíos", como quieran (creo que queda mejor "pedidos"). Acá se renderizará el listado de ese historial</p>
+          <p>O "mis envíos", como quieran (creo que queda mejor "pedidos"). Acá se renderizará el listado de ese
+            historial</p>
 
-          
+
         </section>
         <!-- Sección 3, medios de pago -->
         <section id="mediosPago" class="section">
           <h2>Medios de pago</h2>
           <p>AAcá está la estructura donde renderizaran esto</p>
-          
+
           <div id="payment-section">
             <h3>Métodos de Pago</h3>
             <div id="payment-methods">
@@ -159,6 +162,26 @@
                 </div>
               </li>
             </ul>
+          </div>
+        </section>
+        <!-- Sección 5, Seguridad -> reseteo de contraseña -->
+        <section id="seguridad" class="section">
+          <h2>Configuración</h2>
+          <p>Preferencias, privacidad, etc.</p>
+
+          <form action="/api/change-password" method="POST">
+            <h2 class="Registro">Cambiar contraseña</h2>            
+            <input type="password" placeholder="Contraseña Actual" id="currentPassword" name="currentPassword" required>
+            <input type="password" placeholder="Nueva Contraseña" id="newPassword" name="newPassword" required>
+            <input type="password" placeholder="Repite la Nueva Contraseña" id="confirmPassword" name="confirmPassword"
+              required>
+            <button type="submit">Enviar</button>
+          </form>
+
+          <div class="confirmation-box">
+            <h1>¡Cambio de Contraseña Exitoso!</h1>
+            <p>Tu contraseña se cambio con éxito. Ahora puedes iniciar sesión con tus nuevas credenciales.</p>
+            <a href="/api/login" class="btn">Iniciar Sesión</a>
           </div>
         </section>
       </div>
@@ -268,7 +291,7 @@
       
   </script> -->
 
-  <div class="capa"></div>
+    <div class="capa"></div>
   </main>
 
   <!-- Footer -->
@@ -318,4 +341,5 @@
   <!-- Scripts -->
   <script src="profile.js"></script>
 </body>
+
 </html>
