@@ -12,6 +12,9 @@ const __dirname = path.dirname(__filename);
 // Crear instancia de la aplicación Express
 const app = express();
 
+app.use('/resources/js', express.static(path.join(__dirname, 'resources/js')));
+
+
 // Configurar el motor de plantillas EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '..', 'src', 'pages'));

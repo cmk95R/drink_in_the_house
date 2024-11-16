@@ -16,8 +16,9 @@ body {
   width: 100%;
   max-width: 1800px;
   height: 400px;
-  margin: 20px auto;
+  margin: 0 auto;
   overflow: hidden;
+  background-color: red;
 }
 
 .slider-container img {
@@ -68,11 +69,13 @@ body {
     -webkit-box-shadow: 10px 10px 5px 0px rgba(194, 194, 194, 0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(194, 194, 194, 0.75);
     max-width: 300px;
+    height: 500px;
     margin: auto;
     text-align: center;
     font-family: arial;
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
   }
   
   .badge {
@@ -91,11 +94,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 200px;
-    padding: 50px;
     background: #ffffff;
     position: relative;
     border-radius: 10%;
+    margin: auto;
   }
   
   .product-tumb img {
@@ -103,12 +105,12 @@ body {
     mix-blend-mode: multiply;
    */
     max-width: 200px;
-    max-height: 250px;
+    max-height: 200px;
     object-fit: contain;
   }
   
   .product-details {
-    padding: 30px;
+    padding: 15px 30px;
   }
   
   .product-catagory {
@@ -154,6 +156,7 @@ body {
   }
   
   .product-price {
+    align-items: center;
     font-size: 22px;
     color: #ff9d00;
     font-weight: 600;
@@ -177,6 +180,7 @@ body {
     color: #cccccc;
     transition: 0.3s;
     font-size: 17px;
+    margin: 0 30px;
   }
   
   .product-links a:hover {
@@ -201,9 +205,10 @@ body {
     margin-left: 3px;
   }
 
-
-
-
-
-
-
+  .search-container{
+    padding: 20px;
+    margin: auto;
+    max-width: 450px;
+    background-color: beige;
+    border-radius: 5px;
+  }

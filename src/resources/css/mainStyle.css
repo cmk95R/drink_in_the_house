@@ -3,24 +3,27 @@ header {
     background-color: #000000;
     color: white;
     text-align: left;
-    
+    padding: 20px;
     top: 0;
     width: 100%;
 }
 
 .container-header{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     padding-right: 30px;
     padding-left: 10px;
 }
+
 .box-listas{
-    margin: 0%;
+  padding-top: 5px;
+  display: flex;
 }
 .listas {
-    padding-bottom: 5px;
     color: white;
     list-style: none;
+    margin: 0 10px;
 }
 
 .listas a{

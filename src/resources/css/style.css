@@ -6,7 +6,6 @@
 }
 body{
   margin: 0;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -36,7 +35,7 @@ a:hover:not(#cart), button:hover{
 header{
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.09);
   margin-bottom: 10px;
-  font-size: larger;
+
   background-color: rgb(61, 61, 61);
 }
 
@@ -76,10 +75,5 @@ header nav img{
 
 /*-------------Footer-------------*/
 footer{
-  text-align: center;
-  box-shadow: -1px -3px 5px rgba(0, 0, 0, 0.09);
-  padding-top: 2px;
   margin-top: auto;
-  background-color: rgb(61, 61, 61);
-  color: whitesmoke;
 }

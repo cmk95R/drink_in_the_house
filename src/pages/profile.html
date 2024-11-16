@@ -29,7 +29,7 @@
     <div class="cont-menu">
       <nav>
         <li><button onclick="showSection('datos')">Mis Datos</button></li>
-        <li><button onclick="showSection('historialPedidos')">Historial de pedidos</button></li>
+        <li><button onclick="showSection('historial-container')">Historial de pedidos</button></li>
         <li><button onclick="showSection('mediosPago')">Métodos de pago</button></li>
         <li><button onclick="showSection('notificaciones')">Notificaciones</button></li>
         <li><button onclick="showSection('seguridad')">Seguridad</button></li>
@@ -48,14 +48,10 @@
           <h2>Mis Datos</h2>
           <p>Información de perfil, nombre, dirección, etc.</p>
         </section>
-        <!-- Sección 2, medios de pago -->
-        <section id="historialPedidos" class="section">
-          <h2>Mis pedidos</h2>
-          <p>O "mis envíos", como quieran (creo que queda mejor "pedidos"). Acá se renderizará el listado de ese
-            historial</p>
-
-
-        </section>
+        <!-- Sección 2, Historial de Pedidos -->
+    <section id="historial-container" class="section">
+        <!-- El historial de compras se cargará aquí -->
+      </section>
         <!-- Sección 3, medios de pago -->
         <section id="mediosPago" class="section">
           <h2>Medios de pago</h2>
@@ -339,7 +335,8 @@
     </div>
   </footer>
   <!-- Scripts -->
-  <script src="profile.js"></script>
+  <script src="../resources/js/profile.js"></script>
+  <script src="../resources/js/historial.js"></script>
 </body>
 
 </html>
