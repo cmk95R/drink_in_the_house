@@ -92,15 +92,34 @@ main {
 }
 
 #payment-methods p {
-    color: #666; /* Color del texto para los métodos de pago */
+    color: #666; /* Color del texto para los métodos add-payment-method de pago */
 }
 .payment-method{
     background-color:#bbb;
     margin: 20px;
     padding: 5px;
 }
-#add-payment-method,
-#save-payment-method,
+#add-payment-method{
+    background-color: #ccc; /* Fondo gris claro para los botones */
+    color: #000; /* Texto en negro */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espacio interno */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin-right: 10px; /* Espacio entre botones */
+    margin-top: 500px;
+}
+#save-payment-method{
+    background-color: #ccc; /* Fondo gris claro para los botones */
+    color: #000; /* Texto en negro */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espacio interno */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin-right: 10px; /* Espacio entre botones */
+    align-items: center; 
+    
+}
 #cancel-payment {
     background-color: #ccc; /* Fondo gris claro para los botones */
     color: #000; /* Texto en negro */
@@ -109,6 +128,9 @@ main {
     padding: 10px 15px; /* Espacio interno */
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
     margin-right: 10px; /* Espacio entre botones */
+    margin-top: 50px;
+    align-items: center; 
+    
 }
 
 #add-payment-method:hover,

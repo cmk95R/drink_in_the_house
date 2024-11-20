@@ -1,12 +1,18 @@
-/* Simulando los métodos de pago cargados desde el archivo JSON
-let paymentMethods = [
-    {
-        "id": 1,
-        "numero_tarjeta": "1234 5678 9012 3456",
-        "fecha_expiracion": "12/25",
-        "cvv": "123"
+// Array inicial de métodos de pago
+let paymentMethods = [];
+
+// Función para cargar los métodos de pago desde localStorage
+function loadFromLocalStorage() {
+    const storedMethods = localStorage.getItem('paymentMethods');
+    if (storedMethods) {
+        paymentMethods = JSON.parse(storedMethods);
     }
-];
+}
+
+// Función para guardar los métodos de pago en localStorage
+function saveToLocalStorage() {
+    localStorage.setItem('paymentMethods', JSON.stringify(paymentMethods));
+}
 
 // Función para mostrar los métodos de pago
 function loadPaymentMethods() {
@@ -44,12 +50,50 @@ function editPaymentMethod(id) {
     }
 }
 
+// Validaciones dinámicas para los inputs
+const cardNumberInput = document.getElementById('card-number');
+const cardExpiryInput = document.getElementById('card-expery');
+const cardCVVInput = document.getElementById('card-cvv');
+
+// Limitar el número de tarjeta a 16 caracteres y solo números
+cardNumberInput.addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 16); // Solo números, máximo 16 dígitos
+});
+
+// Cambiar el tipo de input para fecha de expiración
+cardExpiryInput.addEventListener('focus', function () {
+    this.type = 'month'; // Cambia dinámicamente a tipo "month"
+});
+
+// Limitar el CVV a 3 caracteres y solo números
+cardCVVInput.addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 3); // Solo números, máximo 3 dígitos
+});
+
 // Función para guardar o actualizar un método de pago
 document.getElementById('save-payment-method').addEventListener('click', function() {
     const id = this.getAttribute('data-id');
-    const cardNumber = document.getElementById('card-number').value;
-    const cardExpiry = document.getElementById('card-expery').value;
-    const cardCVV = document.getElementById('card-cvv').value;
+    const cardNumber = cardNumberInput.value;
+    const cardExpiry = cardExpiryInput.value;
+    const cardCVV = cardCVVInput.value;
+
+    // Validar número de tarjeta
+    if (cardNumber.length !== 16) {
+        alert('El número de tarjeta debe tener exactamente 16 dígitos.');
+        return;
+    }
+
+    // Validar fecha de expiración
+    if (!cardExpiry) {
+        alert('Por favor, selecciona una fecha de expiración válida.');
+        return;
+    }
+
+    // Validar CVV
+    if (cardCVV.length !== 3) {
+        alert('El CVV debe tener exactamente 3 dígitos.');
+        return;
+    }
 
     if (id) {
         // Actualizar método de pago existente
@@ -70,6 +114,7 @@ document.getElementById('save-payment-method').addEventListener('click', functio
         });
     }
 
+    saveToLocalStorage(); // Guardar cambios en localStorage
     loadPaymentMethods();
     document.getElementById('payment-form').style.display = 'none';
     clearForm();
@@ -78,14 +123,15 @@ document.getElementById('save-payment-method').addEventListener('click', functio
 // Función para eliminar un método de pago
 function deletePaymentMethod(id) {
     paymentMethods = paymentMethods.filter(method => method.id !== id);
+    saveToLocalStorage(); // Guardar cambios en localStorage
     loadPaymentMethods();
 }
 
 // Función para limpiar el formulario
 function clearForm() {
-    document.getElementById('card-number').value = '';
-    document.getElementById('card-expery').value = '';
-    document.getElementById('card-cvv').value = '';
+    cardNumberInput.value = '';
+    cardExpiryInput.value = '';
+    cardCVVInput.value = '';
     document.getElementById('save-payment-method').removeAttribute('data-id');
 }
 
@@ -97,5 +143,9 @@ document.getElementById('cancel-payment').addEventListener('click', function() {
 
 // Cargar métodos de pago al iniciar
 document.getElementById('add-payment-method').addEventListener('click', addPaymentMethod);
-window.onload = loadPaymentMethods;
-*/
+
+// Cargar métodos desde localStorage al iniciar la página
+window.onload = function() {
+    loadFromLocalStorage(); // Recuperar datos del localStorage
+    loadPaymentMethods();   // Mostrar los métodos de pago
+};
