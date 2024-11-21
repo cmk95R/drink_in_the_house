@@ -51,7 +51,7 @@ export const mReestablecer = async (req, res) => {
         console.log('Message sent', info.messageId);
 
         // Respuesta al cliente después de enviar el correo
-        return res.redirect ("/api/confirmSendEmail")
+        return res.redirect ("/api/login")
         
     } catch (error) {
         console.error('Error al enviar el correo:', error);

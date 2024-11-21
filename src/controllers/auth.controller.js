@@ -4,18 +4,52 @@ import jwt from "jsonwebtoken"
 import { createAccessToken } from "../libs/jwt.js";
 import mConfirmacion from './mConfirmacion.js';
 import { mReestablecer } from './mReestablecer.js';
-import path from 'path';  // Asegúrate de importar path
+import path from 'path';
 import { fileURLToPath } from 'url';
+import { validationResult } from "express-validator";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+const calculateAge = (birthDate) => {
+    const today = new Date();
+    const birthDateObj = new Date(birthDate);
+    let age = today.getFullYear() - birthDateObj.getFullYear();
+    const month = today.getMonth();
+    if (month < birthDateObj.getMonth() || (month === birthDateObj.getMonth() && today.getDate() < birthDateObj.getDate())) {
+        age--;
+    }
+    return age;
+};
 export const register = async (req, res) => {
-    console.log("Registro en curso");
+    const errors = validationResult(req);
 
-    const { username, email, password, phoneNumber, address } = req.body;
+    if (!errors.isEmpty()) {
+        return res.status(400).render('register', {
+            errors: errors.array(),
+            formData: req.body, // Mantener los datos del formulario
+        });
+    }
 
-    console.log(username, email, password, phoneNumber, address);
+    const { username, email, password, phoneNumber, address, birthdate } = req.body;
+
+    // Verifica si birthdate está presente
+    if (!birthdate) {
+        return res.status(400).render('register', {
+            errors: [{ msg: 'La fecha de nacimiento es obligatoria' }],
+            formData: req.body,
+        });
+    }
+
+    // Validar que la persona sea mayor de 18 años
+    const age = calculateAge(birthdate);
+    if (age < 18) {
+        return res.status(400).render('register', {
+            errors: [{ msg: 'Debes ser mayor de 18 años para registrarte' }],
+            formData: req.body,
+        });
+    }
 
     try {
         // Crear un usuario de prueba si no existe
@@ -48,12 +82,8 @@ export const register = async (req, res) => {
             email,
             password: passwordHash,
             phoneNumber,
-            address: {
-                street: address.street,
-                city: address.city,
-                province: address.province,
-                postalCode: address.postalCode
-            }
+            address,
+            birthdate,
         });
 
         const userSaved = await newUser.save();
@@ -64,8 +94,15 @@ export const register = async (req, res) => {
         res.redirect("/api/login");
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error(error);
+        res.status(500).send('Error al registrar el usuario');
     }
+};
+
+// Controlador para mostrar el formulario de registro
+export const showRegisterForm = (req, res) => {
+    const user = req.session.user || null;  
+    res.render("register", { errors: [], formData: {} },); // Mostrar el formulario vacío al inicio
 };
 
 export const changePassword = async (req,res) => {
@@ -87,7 +124,10 @@ export const changePassword = async (req,res) => {
         userFound.password = passwordHash
         await userFound.save()
         console.log("NuevaContraseña: "+ newPassword);
-        res.redirect("/api/confirmChangePass");
+        req.session.destroy();
+        res.clearCookie("token");  
+      
+        return res.json({ success: true, message: "Contraseña cambiada con éxito" });
 
 
     } catch (error) {
@@ -122,7 +162,7 @@ export const resetPassword = async (req, res) => {
         // Redirigir a la página de confirmación de envío de correo
         console.log("Se envio el mail correctamente");
         
-        return res.redirect('/api/confirmSendEmail');
+        return res.redirect('/api/login');
 
     } catch (error) {
         console.error('Error al restablecer la contraseña: ', error);
@@ -133,32 +173,41 @@ export const resetPassword = async (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
-    console.log(email, password);
 
     try {
         const userFound = await User.findOne({ email });
 
-        if (!userFound) return res.status(404).json({ message: "Usuario no encontrado" });
+        if (!userFound) {
+            // Si el usuario no se encuentra, mostramos un error en la vista
+            return res.render('login', {
+                errors: [{ msg: "Usuario no encontrado" }]
+            });
+        }
 
         const isMatch = await bcrypt.compare(password, userFound.password);
-        if (!isMatch) return res.status(404).json({ message: "Contraseña incorrecta" });
+        if (!isMatch) {
+            // Si la contraseña no coincide, mostramos un error en la vista
+            return res.render('login', {
+                errors: [{ msg: "Contraseña incorrecta" }]
+            });
+        }
 
+        // Si el login es correcto, creamos el token y redirigimos
         const token = await createAccessToken({ id: userFound._id });
-
-            req.session.user = {
+        req.session.user = {
             id: userFound._id,
             nombre: userFound.nombre,
             email: userFound.email
         };
 
         res.cookie("token", token);
-
         res.redirect("/");
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 };
+
 
 
 // controllers/authController.js
@@ -168,6 +217,8 @@ export const logout = (req, res) => {
     return res.redirect("/");
 }
 
+
+
 export const profile = async (req, res) => {
     try {
         const userFound = await User.findById(req.user.id);
@@ -175,10 +226,13 @@ export const profile = async (req, res) => {
             return res.status(400).json({ message: "Usuario no encontrado" });
         }
 
-        return res.sendFile(path.join(__dirname, '../pages/profile.html'));  
-
+        // Usamos 'res.render' para renderizar la vista y pasar los datos del usuario
+        return res.render('profile', {
+            user: userFound
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Error interno del servidor" });
     }
-}
+};
+

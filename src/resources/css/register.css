@@ -48,7 +48,9 @@ header {
 
 /* Estilo para el footer */
 
-
+.error-container{
+    color: rgb(255, 255, 255);
+}
 /* Estilo para el formulario */
 main {
     display: flex;
