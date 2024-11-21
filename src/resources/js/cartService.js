@@ -9,33 +9,36 @@ function reiniciarCarrito() {
 
 /** Finaliza la compra y guarda el historial */
 /** Evento de clic en el botón de finalizar compra */
-document.getElementById("boton-pagar").addEventListener("click", finalizarCompra);
+document.getElementById("boton-pagar").addEventListener("click", () => {
+  if (validarMetodoPagoSeleccionado()) {
+    finalizarCompra();
+  } else {
+    alert("Por favor, selecciona un método de pago antes de continuar.");
+  }
+});
+
+function validarMetodoPagoSeleccionado() {
+  const checkboxes = document.querySelectorAll('#payment-methods-form input[type="checkbox"]');
+  return Array.from(checkboxes).some(checkbox => checkbox.checked); // Retorna true si al menos un checkbox está marcado
+}
+
 function finalizarCompra() {
-  // Obtener el carrito actual desde localStorage
   const carritoActual = JSON.parse(localStorage.getItem("bebidas")) || [];
 
-  // Si el carrito está vacío, no se realiza ninguna acción
   if (carritoActual.length === 0) {
     alert("El carrito está vacío.");
     return;
   }
 
-  // Obtener el historial actual del localStorage
   let historial = JSON.parse(localStorage.getItem("historial")) || [];
-
-  // Agregar los productos del carrito al historial con la fecha de compra
   const nuevaCompra = {
     fecha: new Date().toLocaleString(),
     productos: carritoActual
   };
   historial.push(nuevaCompra);
 
-  // Guardar el historial actualizado en localStorage
   localStorage.setItem("historial", JSON.stringify(historial));
-
-  // Vaciar el carrito y actualizar la cuenta
   reiniciarCarrito();
-
   notyf.success("¡Compra realizada exitosamente! Los productos se han guardado en el historial.");
 }
 

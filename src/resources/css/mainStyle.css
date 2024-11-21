@@ -1,36 +1,6 @@
-/* Estilo para el header */
-header {
-    background-color: #000000;
-    color: white;
-    text-align: left;
-    padding: 20px;
-    top: 0;
-    width: 100%;
-}
-
-.container-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 30px;
-    padding-left: 10px;
-}
-
-.box-listas{
-  padding-top: 5px;
-  display: flex;
-}
-.listas {
-    color: white;
-    list-style: none;
-    margin: 0 10px;
-}
-
-.listas a{
-    text-decoration: none;
-    color: white;
-}
-
+/*-----------------------------------------------------------------------------*/
+/*-----------------------------ASPECTOS GENERALES------------------------------*/
+/*-----------------------------------------------------------------------------*/
 @import url("https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap");
 * {
   margin: 0;
@@ -38,37 +8,36 @@ header {
   box-sizing: border-box;
   font-family: "Montserrat Alternates", sans-serif;
 }
-body {
-  background-image:url(../imagenes/foodiesfeed.com_glass-of-ice-tea.jpg) ;
-  background-attachment: fixed;
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat;
+header {
+    background-color: #000000;
+    text-align: left;
+    padding: 20px;
+    top: 0;
+    width: 100%;
+    margin-bottom: 10px;
 }
-.capa {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-  top: 0;
-  left: 0;
+a{
+  background-color: unset;
+  border:unset;
+  cursor:pointer;
+  transition: 200ms;
+}/*Color cuando pasas el cursor por encima xd*/
+a:hover:not(#cart), button:hover{
+  color: #ee6130;
+  border-bottom: 2px solid #c7c7c7;
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
 }
-/*Estilos para el encabezado*/
-.header {
-  width: 100%;
-  height: 100px;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-.container {
+
+/*-----------------------------------------------------------------------------*/
+/*-----------------------ESTILADO HEADER (WILLY-PROFILE)-----------------------*/
+/*-----------------------------------------------------------------------------*/
+.container {/*------.container ENCIERRA LA NAVEGACION------*/
   width: 90%;
   max-width: 1200px;
   margin: auto;
 }
-.container .btn-menu,
-.logo {
+.container .btn-menu{
   float: left;
   line-height: 100px;
 }
@@ -77,12 +46,7 @@ body {
   font-size: 25px;
   cursor: pointer;
 }
-.logo h1 {
-  color: #fff;
-  font-weight: 400;
-  font-size: 22px;
-  margin-left: 10px;
-}
+/*---INICIO, NOSOTROS, CONTACTO---*/
 .container .menu {
   float: right;
   line-height: 100px;
@@ -93,24 +57,93 @@ body {
   line-height: normal;
   text-decoration: none;
   color: #fff;
-  transition: all 0.3s ease;
+
   border-bottom: 2px solid transparent;
   font-size: 15px;
   margin-right: 5px;
 }
-.container .menu a:hover {
-  border-bottom: 2px solid #c7c7c7;
-  padding-bottom: 5px;
+/*-----------------------ESTILADO HEADER (General?)-----------------------*/
+.container-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-/*Fin de Estilos para el encabezado*/
-
-/* Estilo para el footer */
-footer {
-    background-color: #000000;
+.container-header h1 a{
+  text-decoration: none;
+  color: white;
+}
+.box-listas{
+  padding-top: 5px;
+  display: flex;
+}
+.listas {
     color: white;
-    text-align: center;
-    padding: 10px;
-    width: 100%;
-    position: sticky;
-    bottom: 0;
+    list-style: none;
+    margin: 0 10px;
+}
+.listas a{
+    text-decoration: none;
+    color: white;
+}
+
+/*-----------------------------------------------------------------------------*/
+/*------------------------------------BODY-------------------------------------*/
+/*-----------------------------------------------------------------------------*/
+body {
+  background-image:url(../imagenes/foodiesfeed.com_glass-of-ice-tea.jpg) ;
+  background-attachment: fixed;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+}
+
+/*******************************nidea que es*/
+.capa {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+/*-----------------------------------------------------------------------------*/
+/*------------------------------ESTILADO FOOTER--------------------------------*/
+/*-----------------------------------------------------------------------------*/
+footer {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+.main-footer {
+  background-color: #333;
+  flex-shrink: 0;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+}
+.footer-section {
+  flex: 1;
+  min-width: 150px;
+  margin: 10px 0;
+}
+.footer-section h4 {
+  margin-bottom: 10px;
+}
+.footer-section ul {
+  list-style: none;
+}
+.footer-section li {
+  margin: 5px 0;
+}
+.footer-copyright {
+  text-align: center;
+  padding-top: 10px;
+  border-top: 1px solid #444;
 }

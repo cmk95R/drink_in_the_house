@@ -74,9 +74,9 @@ function cargarCarritoEnContenedor() {
         const itemContainer = document.createElement('div');
         itemContainer.className = 'cart-item';
         itemContainer.innerHTML = `
-            <p><strong>${producto.nombre}</strong></p>
-            <p>Precio: $${producto.valor}</p>
-            <p>Cantidad: ${producto.cantidad}</p>
+            <p class="producto-Titulo">${producto.nombre}</p>
+            <p class="producto-Precio">Precio: $${producto.valor}</p>
+            <p class="producto-Cantidad">Cantidad: ${producto.cantidad}</p>
             <button class="btn btn-danger eliminar-item" data-id="${producto.id}">Eliminar</button>
         `;
         cartContainer.appendChild(itemContainer);
