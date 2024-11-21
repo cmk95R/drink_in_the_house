@@ -12,12 +12,13 @@ const __dirname = path.dirname(__filename);
 const router = Router();
 
 //Ruta para mostrar la pagina de carrito
-router.get('/profile', (req, res) => {
+
+router.get('/profile', authRequired, profile,(req, res) => {
     res.sendFile(path.join(__dirname, '../pages/profile.html'));
 });
 
 //Ruta para mostrar la pagina de carrito
-router.get('/carrito', (req, res) => {
+router.get('/carrito', authRequired,(req, res) => {
     res.sendFile(path.join(__dirname, '../pages/carrito.html'));
 });
 
@@ -50,9 +51,7 @@ router.get('/sistema-notificaciones', (req, res) => {
 });
 
 
-router.get('/perfilUsuario', (req, res) => {
-    res.sendFile(path.join(__dirname, '../pages/perfilusuario.html'));
-});
+
 //Ruta para procesar el registro 
 router.post('/register', register);
 
@@ -69,9 +68,9 @@ router.post('/login', login);
 
 
 
-router.post("/logout", logout)
+router.get("/logout", logout)
 
-router.get('/profile', authRequired , profile)
+
 
 
 export default router

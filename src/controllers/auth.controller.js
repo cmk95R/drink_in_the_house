@@ -4,7 +4,11 @@ import jwt from "jsonwebtoken"
 import { createAccessToken } from "../libs/jwt.js";
 import mConfirmacion from './mConfirmacion.js';
 import { mReestablecer } from './mReestablecer.js';
+import path from 'path';  // Asegúrate de importar path
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const register = async (req, res) => {
     console.log("Registro en curso");
@@ -14,6 +18,30 @@ export const register = async (req, res) => {
     console.log(username, email, password, phoneNumber, address);
 
     try {
+        // Crear un usuario de prueba si no existe
+        const testUser = await User.findOne({ username: 'test' });
+
+        if (!testUser) {
+            const testPasswordHash = await bcrypt.hash('123123', 10);  // Contraseña para el usuario test
+            const newTestUser = new User({
+                username: 'test',
+                email: 'test@test.com',
+                password: testPasswordHash,
+                phoneNumber: '1234567890',
+                address: {
+                    street: 'Test Street',
+                    city: 'Test City',
+                    province: 'Test Province',
+                    postalCode: '12345'
+                }
+            });
+
+            // Guardar el usuario de prueba en la base de datos
+            await newTestUser.save();
+            console.log('Usuario de prueba creado');
+        }
+
+        // Crear el usuario normal (el que se recibe en la solicitud)
         const passwordHash = await bcrypt.hash(password, 10);
         const newUser = new User({
             username,
@@ -32,12 +60,14 @@ export const register = async (req, res) => {
         const token = await createAccessToken({ id: userSaved._id });
         res.cookie("token", token);
 
-        await mConfirmacion({body: {name: username,email}},res)
-        res.redirect("/api/confirm");
+        await mConfirmacion({ body: { name: username, email } }, res);
+        res.redirect("/api/login");
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 export const changePassword = async (req,res) => {
     const {currentPassword,newPassword,confirmPassword} = req.body
 
@@ -102,59 +132,53 @@ export const resetPassword = async (req, res) => {
 
 
 export const login = async (req, res) => {
+    const { email, password } = req.body;
+    console.log(email, password);
 
-    const {email, password} = req.body
-    console.log(email , password);
+    try {
+        const userFound = await User.findOne({ email });
 
-try {
+        if (!userFound) return res.status(404).json({ message: "Usuario no encontrado" });
 
-    const userFound = await User.findOne({email})
+        const isMatch = await bcrypt.compare(password, userFound.password);
+        if (!isMatch) return res.status(404).json({ message: "Contraseña incorrecta" });
 
-    if(!userFound) return res.status(404).json({message: "Usuario no encontrado"})
+        const token = await createAccessToken({ id: userFound._id });
 
-    const isMatch = await bcrypt.compare(password,userFound.password)
-    if(!isMatch) return res.status(404).json({message: "Contraseña incorrecta"})
+            req.session.user = {
+            id: userFound._id,
+            nombre: userFound.nombre,
+            email: userFound.email
+        };
+
+        res.cookie("token", token);
+
+        res.redirect("/");
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 
-        const token = await createAccessToken({id:userFound._id})
-
-        res.cookie("token",token)
-        res.json({
-        id:userFound.id,
-        username: userFound.username,
-        email: userFound.email,
-        phoneNumber: userFound.phoneNumber,
-        address: userFound.address,
-        createdAt: userFound.createdAt,
-        updatedAt: userFound.updatedAt
-        }); 
-
-    }   catch (error) {
-        res.status(500).json({message:error.message});
-        }   
-}
-
+// controllers/authController.js
 export const logout = (req, res) => {
-
-    res.cookie("token","", {
-        expires: new Date(0)
-    })
-    return res.sendStatus(200)
-
+    req.session.destroy();
+    res.clearCookie("token");  
+    return res.redirect("/");
 }
 
 export const profile = async (req, res) => {
-    const userFound = await User.findById(req.user.id)
-    if (!userFound)  return res.status(400).json({message:"Usuario no encontrado"})
-    
-        return res.json({
-            id: userFound._id,
-            username: userFound.username,
-            email: userFound.email,
-            phoneNumber: userFound.phoneNumber,
-            address: userFound.address,
-            createdAt: userFound.createdAt,
-            updatedAt: userFound.updatedAt
-        })
-    res.send("profile")
-}   
+    try {
+        const userFound = await User.findById(req.user.id);
+        if (!userFound) {
+            return res.status(400).json({ message: "Usuario no encontrado" });
+        }
+
+        return res.sendFile(path.join(__dirname, '../pages/profile.html'));  
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Error interno del servidor" });
+    }
+}

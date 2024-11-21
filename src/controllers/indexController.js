@@ -20,10 +20,14 @@ const controller = {
             ? products.filter(product => product.nombre_producto.toLowerCase().includes(keywords.toLowerCase()))
             : products;
 
+        // Obtener el usuario de la sesión
+        const user = req.session.user || null;  // Ajusta esto según cómo guardes el usuario en la sesión
+
         return res.render('index.ejs', {
             products: filteredProducts,  // Pasamos los productos filtrados
             toThousand,
-            keywords // Pasamos el término de búsqueda a la vista para mantenerlo en el formulario
+            keywords, // Pasamos el término de búsqueda a la vista para mantenerlo en el formulario
+            user // Pasamos el objeto 'user' para usarlo en la vista
         });
     }
 };
