@@ -1,34 +1,3 @@
-/* Estilo para el header */
-header {
-    background-color: #000000;
-    color: white;
-    text-align: left;
-    padding: 10px;
-    height: 50px;
-    
-    top: 0;
-    width: 100%;
-}
-
-.container-header{
-    display: flex;
-    justify-content: space-between;
-    padding-right: 30px;
-    padding-left: 10px;
-}
-.box-listas{
-    margin: 0%;
-}
-.listas {
-    padding-bottom: 5px;
-    color: white;
-    list-style: none;
-}
-
-.listas a{
-    text-decoration: none;
-    color: white;
-}
 
 
 .product-detail__main {

@@ -7,7 +7,7 @@ const detailProduct = (req, res) => {
   try {
     // Buscar el producto en el array de productos por su id (asegurando que coincida el tipo)
     const prodFind = productsData.find(product => product.id.toString() === idParam);
-
+    const user = req.session.user || null;
     console.log('Producto encontrado:', prodFind); // Esto muestra el producto en la consola del servidor
 
     if (prodFind) {
@@ -19,7 +19,8 @@ const detailProduct = (req, res) => {
 
       return res.render('productDetail', { 
         prodfind: prodFind, 
-        relatedProducts: relatedProducts 
+        relatedProducts: relatedProducts,
+        user
       });
     } else {
       return res.status(404).send('Producto no encontrado');

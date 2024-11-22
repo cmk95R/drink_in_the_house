@@ -6,6 +6,42 @@ body {
   background-position: center; 
   background-repeat: no-repeat;
 }
+
+/*---------------HEADEEEEEEEEEEEEEEEEER----------------*/
+.container {/*------.container ENCIERRA LA NAVEGACION------*/
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+.container .btn-menu{
+  float: left;
+  line-height: 100px;
+}
+.container .btn-menu label {
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+}
+/*---INICIO, NOSOTROS, CONTACTO---*/
+.container .menu {
+  float: right;
+  line-height: 100px;
+}
+.container .menu a {
+  display: inline-block;
+  padding: 15px;
+  line-height: normal;
+  text-decoration: none;
+  color: #fff;
+
+  border-bottom: 2px solid transparent;
+  font-size: 15px;
+  margin-right: 5px;
+}
+
+/*----*/
+
+
 .modal {
   position: fixed;
   top: 0;
