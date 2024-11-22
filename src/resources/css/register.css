@@ -16,7 +16,6 @@ main {
     
     margin: auto;
 }
-
 .Registro{
     margin-bottom: 10px;
     margin-top: 5px;
@@ -37,12 +36,9 @@ form {
     align-items: center;  /* Centra los elementos horizontalmente */
     justify-content: center; /* Centra los elementos verticalmente */
     padding-top: 20px;
-    
 }
-
 form input {
    /* margin-bottom: 15px;*/
-    
     width: 100%;
     padding: 10px;
     border: none;
@@ -51,16 +47,13 @@ form input {
     border: 1px solid black;
     box-sizing: border-box;
     margin-bottom: 15px;
-    
 }
-
 .input-group {
     display: flex; /* Usar Flexbox para alineación en línea */
     gap: 10px; /* Espacio entre inputs */
     flex: 1;
 
 }
-
 button {
     background-color: white;
     color: #000000;
@@ -71,49 +64,6 @@ button {
     font-weight: bold;
     transition: background-color 0.3s;
 }
-
 button:hover {
     background-color: #f2f2f2;
 }
-
-.main-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    flex-shrink: 0;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding-bottom: 20px;
-}
-
-.footer-section {
-    flex: 1;
-    min-width: 150px;
-    margin: 10px 0;
-}
-
-.footer-section h4 {
-    margin-bottom: 10px;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section li {
-    margin: 5px 0;
-}
-
-.footer-copyright {
-    text-align: center;
-    padding-top: 10px;
-    border-top: 1px solid #444;
-}
-
-/* Media queries se mantienen igual */
-
-
