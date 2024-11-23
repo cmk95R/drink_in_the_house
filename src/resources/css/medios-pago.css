@@ -7,54 +7,20 @@
 
 /* Body */
 body {
-    font-family: Arial, sans-serif;
+    
     line-height: 1.6;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* Navbar */
-.main-header {
-    background-color: #333; /* Color de fondo gris */
-    color: #fff; /* Color del texto blanco para que resalte */
-    padding: 20px; /* Espaciado interno para el header */
-}
 
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Para alinear los contenedores a los extremos */
-}
 
-.logo-container {
-    flex: 0 0 auto; /* No permite que el logo se expanda */
-    margin-right: 20px; /* Espacio entre el logo y los enlaces */
-}
 
-.logo-container h1 {
-    font-size: 1.5em; /* Tamaño del texto del logo */
-    font-weight: bold; /* Negrita para el texto del logo */
-    text-align: left; /* Alinear el texto a la izquierda */
-    margin: 0; /* Eliminar margen por defecto */
-}
 
-.header-links {
-    display: flex;
-    justify-content: center; /* Centra el contenedor de enlaces */
-    flex: 1; /* Toma el espacio necesario */
-}
 
-.header-links h2 {
-    margin: 0 15px; /* Espaciado entre los títulos */
-    text-align: center; /* Centra los títulos */
-}
 
-/* Estilos para el contenedor vacío */
-.spacer-container {
-    width: 100px; /* Ancho fijo para el contenedor vacío */
-    min-width: 30px; /* Ancho mínimo para asegurar que no sea demasiado estrecho */
-}
+
 
 
 
