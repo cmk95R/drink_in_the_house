@@ -15,25 +15,7 @@
 	<title>Carrito</title>
 </head>
 <body>
-    <header>
-        <div class="container-header">
-            <div>
-                <h1><a href="/">Drink in the House</a></h1>
-            </div>
-            <div class="container-listas">
-                <ul class="box-listas">
-                    <li class="listas">
-                        <a id="cart" data-bs-toggle="modal" data-bs-target="#miModal">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <span id="cuenta-carrito">0</span>
-                        </a>
-                    </li>
-                    <li class="listas" style="margin-bottom: 5px;"><a href="/api/register">REGISTRO DE USUARIOS</a></li>
-                    <li class="listas"><a href="/api/profile">INICIO DE SESIÓN</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
+	<%- include('partials/header') %>
 
 	<main>
 		<section class="carrito">

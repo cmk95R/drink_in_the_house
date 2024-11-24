@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {login ,register,showRegisterForm,logout,profile, changePassword } from "../controllers/auth.controller.js"
+import carrito from "../controllers/carrito.controller.js"
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {authRequired}  from "../middlewares/validateToken.js";
@@ -26,8 +27,8 @@ router.get('/profile', authRequired, profile,(req, res) => {
 });
 
 //Ruta para mostrar la pagina de carrito
-router.get('/carrito', authRequired,(req, res) => {
-    res.sendFile(path.join(__dirname, '../pages/carrito.html'));
+router.get('/carrito', authRequired, carrito.carrito,(req, res) => {
+    res.render('carrito');
 });
 
 
