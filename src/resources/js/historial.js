@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", mostrarHistorial);
 
-
 function mostrarHistorial() {
   const historialContainer = document.getElementById("historial-container");
   historialContainer.innerHTML = ""; // Limpiar el contenido inicial
@@ -47,7 +46,11 @@ function mostrarHistorial() {
       const cancelarBtn = document.createElement("button");
       cancelarBtn.innerText = "Cancelar Pedido";
       cancelarBtn.classList.add("cancelar-btn");
-      cancelarBtn.addEventListener("click", () => cancelarPedido(index, productoIndex));
+      cancelarBtn.setAttribute("data-bs-toggle", "modal");
+      cancelarBtn.setAttribute("data-bs-target", "#exampleModal");
+
+      // Pasar indices al modal
+      cancelarBtn.addEventListener("click", () => mostrarModal(index, productoIndex));
 
       productoItem.appendChild(cancelarBtn);
       productosLista.appendChild(productoItem);
@@ -56,6 +59,14 @@ function mostrarHistorial() {
     compraElement.appendChild(productosLista);
     historialContainer.appendChild(compraElement);
   });
+}
+
+// Función para mostrar el modal con los índices de la compra y el producto
+function mostrarModal(compraIndex, productoIndex) {
+  const confirmarBtn = document.querySelector(".btn-cancelar");
+
+  // Actualizar el evento del botón "Confirmar" en el modal
+  confirmarBtn.onclick = () => cancelarPedido(compraIndex, productoIndex);
 }
 
 // Función para cancelar un pedido (eliminar producto del historial)
@@ -73,6 +84,10 @@ function cancelarPedido(compraIndex, productoIndex) {
   // Guardar el nuevo historial actualizado en localStorage
   localStorage.setItem("historial", JSON.stringify(historial));
 
-  // Volver a mostrar el historial actualizado
+  // Ocultar el modal y volver a mostrar el historial actualizado
+  const modal = document.querySelector("#exampleModal");
+  const bootstrapModal = bootstrap.Modal.getInstance(modal);
+  bootstrapModal.hide();
+
   mostrarHistorial();
 }

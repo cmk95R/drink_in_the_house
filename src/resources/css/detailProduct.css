@@ -74,9 +74,13 @@ border-radius: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    
+    background-color: #fafafa;
     
 }
+h2{
+    background-color: #fafafa;
+}
+
 .card-container_detail{
     display: flex;
     flex-direction: row;
